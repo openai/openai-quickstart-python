@@ -1,0 +1,3 @@
+FLASK_APP=app
+FLASK_ENV=development
+OPENAI_API_KEY=
