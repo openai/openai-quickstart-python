@@ -1,8 +1,15 @@
+from asyncio import constants
 import os
 
 import openai
 from flask import Flask, redirect, render_template, request, url_for, jsonify
 # from flask_cors import CORS, cross_origin
+
+# using SendGrid's Python Library
+# https://github.com/sendgrid/sendgrid-python
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+from constants import ASSEMBO_CONTACT, sendgrid_templates
 
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -40,6 +47,31 @@ def todo():
     # return render_template("index.html", result=result)
     # return result
 
+@app.route("/send_email", methods=("GET", "POST"))
+def send_email():
+    template_id = sendgrid_templates["POST_MEETING"]
+    try:
+        to_email = request.json.get('toEmail')
+        notes = request.json.get('notes')
+        sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY", default = None))
+        data = {
+            "personalizations": [{
+                "to": [{
+                    "email": to_email
+                }],
+                'dynamic_template_data': { "notes": notes }
+            }],
+            "from": {
+                "email": ASSEMBO_CONTACT
+            },
+            "template_id": template_id
+        }
+        # response = sg.send(message)
+        response = sg.client.mail.send.post(request_body=data)
+        return "200"
+    except Exception as e:
+        print(e)
+        return "sad"
 
 def generate_prompt(animal):
     return animal
