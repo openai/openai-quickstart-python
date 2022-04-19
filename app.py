@@ -40,13 +40,6 @@ def todo():
     )
     return response.choices[0].text
 
-        # return redirect(url_for("index", result=response.choices[0].text))
-
-    # result = request.args.get("result")
-    # print(result)
-    # return render_template("index.html", result=result)
-    # return result
-
 @app.route("/send_email", methods=("GET", "POST"))
 def send_email():
     template_id = sendgrid_templates["POST_MEETING"]
