@@ -44,8 +44,8 @@ def todo():
 def send_email():
     template_id = sendgrid_templates["POST_MEETING"]
     try:
-        to_email = request.json.get('toEmail')
-        notes = request.json.get('notes')
+        to_email = request.args.get('toEmail')
+        notes = request.args.get('notes')
         sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY", default = None))
         data = {
             "personalizations": [{
