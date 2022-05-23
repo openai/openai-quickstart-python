@@ -1,35 +1,32 @@
-import os
+import os, openai, csv, pandas as pd, json
 
-import openai
-from flask import Flask, redirect, render_template, request, url_for
+openai.api_key = "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"
 
-app = Flask(__name__)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+df = pd.read_csv(r'data/NASH_Clinical_Trials.csv')
 
+intro_text = 'A table summarizing clinical trials:\n'
+table_stub = '|drug|disease|'
 
-@app.route("/", methods=("GET", "POST"))
-def index():
-    if request.method == "POST":
-        animal = request.form["animal"]
-        response = openai.Completion.create(
-            engine="text-davinci-002",
-            prompt=generate_prompt(animal),
-            temperature=0.6,
-        )
-        return redirect(url_for("index", result=response.choices[0].text))
+def summarize_rows(rownums):
+    result = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=intro_text + "\n".join(df.iloc[rownums]["official_title"].tolist()) + '\n' + table_stub,
+        temperature=0.4,
+        max_tokens=3500,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0)
+    return(result)
 
-    result = request.args.get("result")
-    return render_template("index.html", result=result)
+def process_results(result):
+    result = table_stub + result['choices'][0]['text']
+    lines = result.split('\n')
+    df = pd.DataFrame([x.split('|') for x in lines])
+    df = df.iloc[:, 1:-1]
+    new_header = df.iloc[0].to_list()
+    df = df[2:]
+    df.columns = new_header
+    return(df[['drug','disease']])
 
-
-def generate_prompt(animal):
-    return """Suggest three names for an animal that is a superhero.
-
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: {}
-Names:""".format(
-        animal.capitalize()
-    )
+output = summarize_rows(range(0,6))
+df = process_results(output)
