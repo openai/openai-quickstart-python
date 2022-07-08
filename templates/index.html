@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
+  <title>Service Kita</title>
   <link
     rel="shortcut icon"
     href="{{ url_for('static', filename='dog.png') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+
+    </ul>
+  </nav>
 </head>
 
 <body>
