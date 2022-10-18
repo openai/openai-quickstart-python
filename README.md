@@ -32,10 +32,15 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
    ```bash
    $ cp .env.example .env
    ```
+   
+7. Make hidden .env files visible for editing
+   macOs - command + shift + .
+   linux - ctrl + h
+   windows - win + h
 
-7. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
+8. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
 
-8. Run the app
+9. Run the app
 
    ```bash
    $ flask run
