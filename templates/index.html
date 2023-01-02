@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>OpenAI Quickstart</title>
+  <title>KSC Demo</title>
   <link
     rel="shortcut icon"
     href="{{ url_for('static', filename='dog.png') }}"
@@ -12,8 +12,10 @@
   <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
   <h3>Name my pet</h3>
   <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
+    <input type="text" name="ingredient1" placeholder="Enter first ingredient:" required />
+    <input type="text" name="ingredient2" placeholder="Enter second ingredient:" required />
+    <input type="text" name="ingredient3" placeholder="Enter third ingredient:" required />
+    <input type="submit" value="Generate recipes" />
   </form>
   {% if result %}
   <div class="result">{{ result }}</div>
