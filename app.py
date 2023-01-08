@@ -1,5 +1,4 @@
 import os
-import openai.Image
 import openai
 from flask import Flask, redirect, render_template, request, url_for
 
