@@ -61,6 +61,5 @@ input[type="submit"] {
   cursor: pointer;
 }
 .result {
-  font-weight: italic;
   margin-top: 120px;
 }
