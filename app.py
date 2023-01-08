@@ -31,10 +31,3 @@ Topic: {}
 Fraction:""".format(
         animal.capitalize()
     )
-
-responsei = openai.Image.create(
-  prompt="a white siamese cat",
-  n=1,
-  size="1024x1024"
-)
-image_url = responsei['data'][0]['url']
