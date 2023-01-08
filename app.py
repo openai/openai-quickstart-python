@@ -21,7 +21,6 @@ def index():
     result = request.args.get("result")
     return render_template("index.html", result=result)
 
-
 def generate_prompt(animal):
     return """Suggest three names for an animal that is a superhero.
 
@@ -33,3 +32,10 @@ Animal: {}
 Names:""".format(
         animal.capitalize()
     )
+
+response = openai.Image.create(
+  prompt="a white siamese cat",
+  n=1,
+  size="1024x1024"
+)
+image_url = response['data'][0]['url']
