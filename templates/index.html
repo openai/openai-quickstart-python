@@ -12,7 +12,7 @@
   <img src="{{ url_for('static', filename='lessonplan.png') }}" class="icon" />
   <h3>What topic do you want to create a lesson plan for?</h3>
   <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an topic" required />
+    <input type="text" name="lptopic" placeholder="Enter an topic" required />
     <input type="submit" value="Generate ideas" />
   </form>
   {% if result %}

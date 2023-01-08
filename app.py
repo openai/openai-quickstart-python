@@ -10,10 +10,10 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
-        animal = request.form["animal"]
+        lptopic = request.form["lptopic"]
         response = openai.Completion.create(
             model="text-davinci-003",
-            prompt=generate_prompt(animal),
+            prompt=generate_prompt(lptopic),
             temperature=0.6,
         )
         return redirect(url_for("index", result=response.choices[0].text))
@@ -22,14 +22,13 @@ def index():
     return render_template("index.html", result=result)
 
 
-def generate_prompt(animal):
-    return """Suggest three names for an animal that is a superhero.
+def generate_prompt(lptopic):
+    return """what are three examples of lesson plans for fractions
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: {}
-Names:""".format(
-        animal.capitalize()
+"Introduction to Fractions": In this lesson, students will learn about the basics of fractions, including what fractions are, how to write them, and how to compare them. The lesson could include activities such as identifying fractions on a number line, representing fractions with models, and comparing fractions using symbols.
+
+"Adding and Subtracting Fractions": In this lesson, students will learn how to add and subtract fractions with the same denominator. The lesson could include activities such as solving word problems involving fractions, creating and solving their own problems, and using a variety of models to represent the fractions.
+
+"Multiplying and Dividing Fractions": In this lesson, students will learn how to multiply and divide fractions. The lesson could include activities such as using visual models to represent the operations, solving word problems involving fractions, and practicing with a variety of problems.""".format(
+        lptopic.capitalize()
     )
