@@ -25,9 +25,9 @@ def generate_prompt(animal):
     return """What is a lesson plan idea for a topic
 
 Topic: Fractions
-Lesson Plan: "Introduction to Fractions": In this lesson, students will learn about the basics of fractions, including what fractions are, how to write them, and how to compare them. The lesson could include activities such as identifying fractions on a number line,
+Lesson Plan: Introduction to Fractions": In this lesson, students will learn about the basics of fractions, including what fractions are, how to write them, and how to compare them. The lesson could include activities such as identifying fractions on a number line,
 Topic: Circles
-Lesson Plan: "Exploring Circles": In this lesson, students will learn about the properties of circles and how to calculate various measures for circles, such as circumference and area. The lesson could include activities such as constructing circles using a variety of methods, measuring and comparing the circumference and diameter of different circles, and using formulas to calculate the area of circles. Other activities could include solving word problems involving circles and creating their own problems for their classmates to solve.
+Lesson Plan: Exploring Circles": In this lesson, students will learn about the properties of circles and how to calculate various measures for circles, such as circumference and area. The lesson could include activities such as constructing circles using a variety of methods, measuring and comparing the circumference and diameter of different circles, and using formulas to calculate the area of circles. Other activities could include solving word problems involving circles and creating their own problems for their classmates to solve.
 Topic: {}
 Fraction:""".format(
         animal.capitalize()
