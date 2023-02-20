@@ -7,7 +7,7 @@ This isa playground for the OpenAI API, adapted from the [quickstart tutorial](h
 1. If you don’t have Python installed, [install it from here](https://www.python.org/downloads/).
 
 2. Clone this repository.
-:=
+
 3. Navigate into the project directory:
 
    ```bash
