@@ -1,7 +1,11 @@
-import os
-import openai
+import os, openai, secrets
 
-# Load your API key from an environment variable or secret management service
-openai.api_key = os.getenv("OPENAI_API_KEY")
 
-response = openai.Completion.create(model="text-davinci-003", prompt="Say this is a test", temperature=0, max_tokens=7)
+def main():
+  # Loads API key from secrets.py
+  openai.api_key = secrets.api_key  
+  response = openai.Completion.create(model="text-davinci-003", prompt="Say this is a test", temperature=0, max_tokens=7)
+  print(response.choices[0].text)
+
+if __name__ == "__main__":
+  main()
