@@ -29,7 +29,7 @@ This isa playground for the OpenAI API, adapted from the [quickstart tutorial](h
 
 The two directories of interest are `playground` and `pet_gen_template`. 
 
-To run the apps in the `playground` directory, contiunue with the following steps:
+To run the apps in the `playground` directory, continue with the following steps:
 
 6. Make a copy of the example secrets file:
 
@@ -45,7 +45,7 @@ To run the apps in the `playground` directory, contiunue with the following step
    $ python play.py
    ```
 
-To run the flask app within the `pet_gen_template` directory, contiunue with the following steps:
+To run the flask app within the `pet_gen_template` directory, continue with the following steps:
 
 6. Make a copy of the example environment variables file:
 
