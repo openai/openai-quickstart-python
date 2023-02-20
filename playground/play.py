@@ -1,6 +1,5 @@
 import os, openai, secrets
 
-
 def main():
   # Loads API key from secrets.py
   openai.api_key = secrets.api_key  
