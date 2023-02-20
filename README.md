@@ -1,6 +1,6 @@
-# OpenAI API Quickstart - Python example app
+# OpenAI API Python playground
 
-This is an example pet name generator app used in the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework. Check out the tutorial or follow the instructions below to get set up.
+This isa playground for the OpenAI API, adapted from the [quickstart tutorial](https://beta.openai.com/docs/quickstart). The pet name generator uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework. 
 
 ## Setup
 
@@ -11,14 +11,14 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
 3. Navigate into the project directory
 
    ```bash
-   $ cd openai-quickstart-python
+   $ cd openai-playground
    ```
 
 4. Create a new virtual environment
 
    ```bash
-   $ python -m venv venv
-   $ . venv/bin/activate
+   $ python -m venv .venv
+   $ . .venv/bin/activate
    ```
 
 5. Install the requirements
@@ -27,15 +27,35 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
    $ pip install -r requirements.txt
    ```
 
-6. Make a copy of the example environment variables file
+The two directories of interest are `playground` and `pet_gen_template`. 
+
+To run the apps in the `playground` directory, contiunue with the following steps:
+
+6a. Make a copy of the example secrets file
+
+   ```bash
+   $ cp secrets_example.py secrets.py
+   ```
+
+7a. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `secrets.py` file
+
+8a. Run the app
+
+   ```bash
+   $ python play.py
+   ```
+
+To run the flask app within the `pet_gen_template` directory, contiunue with the following steps:
+
+6b. Make a copy of the example environment variables file
 
    ```bash
    $ cp .env.example .env
    ```
 
-7. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
+7b. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
 
-8. Run the app
+8b. Run the app
 
    ```bash
    $ flask run
