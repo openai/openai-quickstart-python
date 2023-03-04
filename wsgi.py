@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-#-------------------------------------------------------------------
-#                   CONFIDENTIAL --- WellCloud                           
-#-------------------------------------------------------------------
+#
+#                   @Project Name : quick-chatbot
 #                                                                   
-#                   @Project Name : openai-quickstart-python                 
-#                                                                   
-#                   @File Name    : wsgi.py.py                      
+#                   @File Name    : wsgi.py
 #                                                                   
 #                   @Programmer   : zhanglu                          
 #                                                                     
