@@ -39,7 +39,6 @@ def chatgpt35_api(data):
         'Authorization': "Bearer " + os.getenv("OPENAI_API_KEY")
     }
     try:
-
         response = requests.post(url="https://api.openai.com/v1/chat/completions", headers=headers, json=data)
         answer = [elem["message"] for elem in response.json()['choices']]
         return answer[0]
@@ -79,7 +78,7 @@ def index():
             "max_tokens": 1024,
             "model": "gpt-3.5-turbo",
             "top_p": 1,
-            "temperature": 0.3,
+            "temperature": 0.2,
             "n": 3,
         }
         chat = ChatLog.query.filter_by(session_id=session_id).first()
@@ -103,4 +102,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run("0.0.0.0")
+    app.run("0.0.0.0", debug=True)
