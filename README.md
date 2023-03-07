@@ -4,7 +4,7 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
 
 ## Setup
 
-1. If you don’t have Python installed, [install it from here](https://www.python.org/downloads/)
+1. If you don’t have Python installed, [install it from here](https://www.python.org/downloads/). It is important to note that downloading the incorrect version of Python may result in dependency conflicts. It is recommended to use version 3.7, which is the most widely used version, to avoid such conflicts.
 
 2. Clone this repository
 
@@ -18,7 +18,7 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
 
    ```bash
    $ python -m venv venv
-   $ . venv/bin/activate
+   $ venv/Scripts/activate
    ```
 
 5. Install the requirements
