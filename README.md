@@ -26,7 +26,7 @@ This isa playground for the OpenAI API, adapted from the [quickstart tutorial](h
    ```bash
    $ pip install -r requirements.txt
    ```
-
+   
 The two directories of interest are `playground` and `pet_gen_template`. 
 
 ### Playground
@@ -57,7 +57,7 @@ To run the flask app within the `pet_gen_template` directory, continue with the 
    $ cp .env.example .env
    ```
 
-7. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
+7. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file.
 
 8. Run the app:
 
