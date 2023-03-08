@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+  <title>Revenued Bank Navigator</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='bank.png') }}"
+  />
+  <link 
+    rel="stylesheet" 
+    href="{{ url_for('static', filename='main.css') }}" 
+  />
+</head>
+
+<body>
+  <img class="bank" src="{{ url_for('static', filename='bank.png') }}">
+  <h3>Revenued Bank Navigator</h3>
+  <form action="/" method="post">
+    <label for="priority">Tell me what you want from your bank.</label>
+    <textarea id="priority" name="priority" rows="4" placeholder="e.g. a low international transfer rates, a high yield savings account" required></textarea>
+    <div>
+      <button type="submit" name="action" value="zero">Zero shot</button>
+      <button type="submit" name="action" value="one">One shot</button>
+      <button type="submit" name="action" value="few">Few shot</button>
+    </div>
+  </form>
+{% if result %}
+    <div class="result">{{ result }}</div>
+  {% endif %}
+</body>
