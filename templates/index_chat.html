@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<head>
+  <title>"True Story" Chatbot</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='chat.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  <script>
+    function changeColor(button) {
+      button.style.backgroundColor = "lime";
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+
+    <div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 10px;">
+      <!-- <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;"> -->
+      <img src="{{ url_for('static', filename='roof1.jpg') }}" class="img" />
+      <!-- <img src="{{ url_for('static', filename='roof3.jpg') }}" class="img" /> -->
+    </div>
+    <h3>Pete's Roofing</h1>
+    <div>
+        <label>
+          <strong>Sales assistant:</strong> Hi, can I advise you on any roofing issues?
+          <br>
+          <output id="result">
+            {% if result %}
+            <strong>You: </strong>{{ result.split(sep='|')[0]}}
+            <br>
+            <strong>Sales assistant: </strong>{{ result.split(sep='|')[1]}}
+            {% endif %}
+        </label>
+        </output>
+    </div>
+    <form action="/" method="post">
+      <div class="button-container">
+        <button class="myButton" onclick="changeColor(this)" type="submit" name="user_text"
+          value="{{choices[0]}}">{{choices[0]}}</button>
+        <button class="myButton" onclick="changeColor(this)" type="submit" name="user_text"
+          value="{{choices[1]}}">{{choices[1]}}</button>
+        <button class="myButton" onclick="changeColor(this)" type="submit" name="user_text"
+          value="{{choices[2]}}">{{choices[2]}}</button>
+      </div>
+    </form>
+    <form action="/" method="post">
+      <textarea id="priority" name="user_text" rows="3" placeholder="Choose an option above, or write your own reponse."
+        required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>

@@ -19,7 +19,7 @@ def index():
         return redirect(url_for("index", result=response.choices[0].text))
 
     result = request.args.get("result")
-    return render_template("index.html", result=result)
+    return render_template("index_animal.html", result=result)
 
 
 def generate_prompt(animal):
