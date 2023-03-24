@@ -1,35 +1,65 @@
 import os
-
 import openai
-from flask import Flask, redirect, render_template, request, url_for
+import socket
+
+
+from flask import Flask, request, jsonify, render_template
+
+
+app = Flask(__name__)
+
 
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-@app.route("/", methods=("GET", "POST"))
-def index():
-    if request.method == "POST":
-        animal = request.form["animal"]
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=generate_prompt(animal),
-            temperature=0.6,
-        )
-        return redirect(url_for("index", result=response.choices[0].text))
 
-    result = request.args.get("result")
-    return render_template("index.html", result=result)
+def translate_text(text, from_lang, to_lang):
+    model_engine = "text-davinci-002"
+    prompt = f"Translate the following {from_lang} text to {to_lang}: {text}"
 
-
-def generate_prompt(animal):
-    return """Suggest three names for an animal that is a superhero.
-
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: {}
-Names:""".format(
-        animal.capitalize()
+    response = openai.Completion.create(
+        engine=model_engine,
+        prompt=prompt,
+        max_tokens=100,
+        n=1,
+        stop=None,
+        temperature=0.5,
     )
+
+    translated_text = response.choices[0].text.strip()
+    return translated_text
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/translate-to-korean', methods=['POST'])
+def translate_to_korean():
+    data = request.get_json()
+    input_text = data['text']
+    translated_text = translate_text(input_text, "English", "Korean")
+    return jsonify(translated_text=translated_text)
+
+@app.route('/translate-to-english', methods=['POST'])
+def translate_to_english():
+    data = request.get_json()
+    input_text = data['text']
+    translated_text = translate_text(input_text, "Korean", "English")
+    return jsonify(translated_text=translated_text)
+
+print("After methods")
+
+def find_available_port():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(("", 0))
+        return s.getsockname()[1]
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <h1>Chat</h1>
+    <form id="chat-form">
+      <label for="sender-language">Your language:</label>
+      <select name="sender_language" id="sender-language">
+        <option value="en">English</option>
+        <option value="ko">Korean</option>
+      </select>
+      <label for="recipient-language">Recipient's language:</label>
+      <select name="recipient_language" id="recipient-language">
+        <option value="en">English</option>
+        <option value="ko">Korean</option>
+      </select>
+      <input type="text" name="message" id="message-input">
+      <input type="submit" value="Send">
+    </form>
+    <div id="chat-history"></div>
+  </body>
+</html>
