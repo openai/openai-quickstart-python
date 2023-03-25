@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User Profile - {{ user.username }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ user.username }}'s Profile</h1>
+    <div class="container">
+        <div class="friends-list">
+            <h2>Friends</h2>
+            <ul>
+                {% for friend in user.friends %}
+                    <li><div class="circle"></div>{{ friend.username }}</li>
+                {% else %}
+                    <li>No friends yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="message-area">
+            <div class="previous-messages-wrapper">
+                <div class="bubble sent user1">
+                    <div class="bubble sent">Hey how are you?</div>
+                </div>
+                <div class="bubble sent user2">
+                    <div class="bubble sent">I'm good, thanks for asking!</div>
+                </div>
+                
+                
+            </div>
+            <div class="message-box">
+                <input class="message-input" type="text" placeholder="Type your message...">
+                <div class="send-button"><i class="fa fa-paper-plane"></i></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

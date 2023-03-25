@@ -1,0 +1,188 @@
+/* Set basic styles for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the page title */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+
+
+}
+
+/* Style the friends list */
+.friends-list {
+    width: 30%;
+    margin-right: 20px;
+    padding-left: 20px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 10px;
+}
+
+/* Style the message area */
+.message-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 20px;
+    width: 70%;
+    margin-top: 20px;
+}
+
+.previous-messages {
+    height: 300px;
+    overflow-y: auto;
+}
+
+.message-box {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.message-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: #fff;
+    margin-right: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+.send-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #0095f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.send-button:hover {
+    background-color: #0072c6;
+}
+
+/* Add spacing between the containers */
+.container {
+    display: flex;
+    justify-content: space-between
+}
+
+/* Style the message area */
+.message-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 20px;
+    width: 70%;
+    margin-top: 20px;
+}
+
+.previous-messages-wrapper {
+    height: 300px;
+    overflow-y: auto;
+    padding-right: 20px;
+}
+
+.message-box {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    padding-right: 20px;
+}
+
+.message-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: #fff;
+    margin-right: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+.send-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #0095f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.send-button:hover {
+    background-color: #0072c6
+}
+
+.bubble.sent.user1 {
+    align-self: flex-end;
+    background-color: #0095f6;
+    color: #fff;
+    margin-left: 20%;
+  }
+  
+  .bubble.sent.user1::before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #57b2ef transparent transparent;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+  }
+  
+  .bubble.sent.user2 {
+    align-self: flex-start;
+    background-color: #808080;
+    margin-right: 20%;
+  }
+
+  

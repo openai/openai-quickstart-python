@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>H&A Chat</title>
+    <style>
+      /* Centering the page contents */
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      /* Styling for the friends list */
+      #friends {
+        width: 200px;
+        height: 400px;
+        background-color: #f2f2f2;
+        border-radius: 4px;
+        overflow-y: auto;
+        margin-right: 16px;
+        padding: 16px;
+      }
+
+      /* Styling for the chat window */
+      #chat {
+        width: 400px;
+        height: 400px;
+        background-color: #ffffff;
+        border-radius: 4px;
+        overflow-y: auto;
+        padding: 16px;
+      }
+
+      /* Styling for the message box */
+      #message-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 16px;
+      }
+
+      /* Styling for the message input */
+      #message-input {
+        flex-grow: 1;
+        margin-right: 16px;
+        border-radius: 4px;
+        border: none;
+        padding: 8px;
+        font-size: 16px;
+      }
+
+      /* Styling for the send button */
+      #send-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      /* Hover effect for the send button */
+      #send-button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>H&A Chat</h1>
+    <div id="friends">
+      <h2>Friends</h2>
+      <ul>
+        <li>Friend 1</li>
+        <li>Friend 2</li>
+        <li>Friend 3</li>
+        <li>Friend 4</li>
+        <li>Friend 5</li>
+        <li>Friend 6</li>
+      </ul>
+    </div>
+    <div id="chat">
+      <h2>Chat</h2>
+      <ul>
+        <li>You: Hi there!</li>
+        <li>Friend 1: Hey!</li>
+        <li>You: How's it going?</li>
+        <li>Friend 1: Not bad. How about you?</li>
+      </ul>
+    </div>
+    <div id="message-box">
+      <input type="text" id="message-input" placeholder="Type your message here...">
+      <button id="send-button">Send</button>
+    </div>
+  </body>
+</html>
