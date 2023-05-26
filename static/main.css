@@ -1,66 +1,156 @@
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
-  font-weight: normal;
-  font-style: normal;
+/* styles.css */
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-@font-face {
-  font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
-    url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff) format("woff");
-  font-weight: bold;
-  font-style: normal;
-}
-body,
-input {
-  font-size: 16px;
-  line-height: 24px;
-  color: #353740;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
-}
+
+/* Global styles */
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f7f9fa;
 }
-.icon {
-  width: 34px;
-}
-h3 {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: bold;
-  color: #202123;
-  margin: 16px 0 40px;
-}
-form {
-  display: flex;
-  flex-direction: column;
-  width: 320px;
-}
-input[type="text"] {
-  padding: 12px 16px;
-  border: 1px solid #10a37f;
-  border-radius: 4px;
-  margin-bottom: 24px;
-}
-::placeholder {
-  color: #8e8ea0;
-  opacity: 1;
-}
-input[type="submit"] {
-  padding: 12px 0;
-  color: #fff;
-  background-color: #10a37f;
-  border: none;
-  border-radius: 4px;
+
+header {
+  background-color: #004977;
+  padding: 20px;
   text-align: center;
+}
+
+header h1 {
+  color: #fff;
+  font-weight: 700;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #004977;
+}
+
+#prediction-container {
+  margin-bottom: 20px;
+}
+
+#prediction-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#prediction-form label {
+  margin-right: 10px;
+}
+
+#prediction-form input[type="text"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  flex: 1;
+}
+
+#prediction-form button {
+  padding: 5px 10px;
+  background-color: #004977;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
   cursor: pointer;
 }
-.result {
-  font-weight: bold;
-  margin-top: 40px;
+
+#prediction-result {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#comparison-container {
+  overflow-x: auto;
+}
+
+#stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#stock-table th,
+#stock-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+#stock-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #004977;
+}
+
+#stock-table td:first-child {
+  font-weight: 600;
+}
+
+#stock-table td:nth-child(2),
+#stock-table td:nth-child(3) {
+  text-align: right;
+}
+
+footer {
+  background-color: #004977;
+  padding: 10px;
+  text-align: center;
+}
+
+footer p {
+  color: #fff;
+}
+
+/* Chart Styles */
+
+#stock-table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#stock-table thead {
+  display: table-header-group;
+  background-color: #004977;
+  color: #fff;
+}
+
+#stock-table tbody {
+  display: table-row-group;
+}
+
+#stock-table th,
+#stock-table td {
+  display: table-cell;
+  padding: 8px;
+  text-align: center;
+}
+
+#stock-table th:first-child,
+#stock-table td:first-child {
+  text-align: left;
+}
+
+#stock-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+#stock-table tr:hover {
+  background-color: #e9f0f3;
+  cursor: pointer;
 }

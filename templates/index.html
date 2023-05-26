@@ -1,21 +1,92 @@
 <!DOCTYPE html>
+<html>
 <head>
-  <title>OpenAI Quickstart</title>
-  <link
-    rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
-  />
+  <title>Financial Analysis</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 </head>
-
 <body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
-  <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
-  </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
+  <header>
+    <h1>FinanceGPT</h1>
+  </header>
+  
+  <main>
+    <section id="prediction-section">
+      <h2>Stock Price Prediction</h2>
+      <div id="prediction-container">
+        <form id="prediction-form">
+          <label for="stock-symbol">Stock Symbol:</label>
+          <input type="text" id="stock-symbol" name="stock-symbol" required>
+          <button type="submit">Predict</button>
+        </form>
+        <div id="prediction-result">
+          <!-- Prediction result will be displayed here -->
+        </div>
+      </div>
+    </section>
+
+    <section id="comparison-section">
+      <h2>Comparison</h2>
+      <div id="comparison-container">
+        <table id="stock-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Predicted Price</th>
+              <th>Actual Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2023-05-01</td>
+              <td>$150.00</td>
+              <td>$145.50</td>
+            </tr>
+            <tr>
+              <td>2023-05-02</td>
+              <td>$155.75</td>
+              <td>$159.20</td>
+            </tr>
+            <tr>
+              <td>2023-05-03</td>
+              <td>$160.20</td>
+              <td>$156.80</td>
+            </tr>
+            <tr>
+              <td>2023-05-03</td>
+              <td>$160.20</td>
+              <td>$156.80</td>
+            </tr>
+            <tr>
+              <td>2023-05-03</td>
+              <td>$160.20</td>
+              <td>$156.80</td>
+            </tr>
+            <tr>
+              <td>2023-05-03</td>
+              <td>$160.20</td>
+              <td>$156.80</td>
+            </tr>
+            <tr>
+              <td>2023-05-03</td>
+              <td>$160.20</td>
+              <td>$156.80</td>
+            </tr>
+            <tr>
+              <td>2023-05-03</td>
+              <td>$160.20</td>
+              <td>$156.80</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2023 FinanceGPT</p>
+  </footer>
+  
+  <script src="script.js"></script>
 </body>
+</html>
