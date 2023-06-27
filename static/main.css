@@ -17,8 +17,15 @@ body,
 input {
   font-size: 16px;
   line-height: 24px;
-  color: #353740;
+  color: #000000;
   font-family: "ColfaxAI", Helvetica, sans-serif;
+}
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
 }
 body {
   display: flex;
@@ -27,40 +34,81 @@ body {
   padding-top: 60px;
 }
 .icon {
-  width: 34px;
+  width: 500px;
 }
 h3 {
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #202123;
+  color: #213921;
   margin: 16px 0 40px;
 }
 form {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 80%;
 }
-input[type="text"] {
+/* input[type="text"] {
   padding: 12px 16px;
-  border: 1px solid #10a37f;
+  border: 1px solid #6d8d24;
   border-radius: 4px;
   margin-bottom: 24px;
+  width :80%;
+} */
+textarea, select, input{
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+  padding: 12px 16px;
+  border: 1px solid #6d8d24;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  width :80%;
 }
 ::placeholder {
   color: #8e8ea0;
   opacity: 1;
 }
-input[type="submit"] {
+
+/* input[type="submit"] {
   padding: 12px 0;
   color: #fff;
-  background-color: #10a37f;
+  background-color: #6d8d24;
   border: none;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  display: inline;
+}
+input[type="reset"] {
+  padding: 12px 0;
+  color: #fff;
+  background-color: #6d8d24;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  display: inline;
+} */
+.button, button {
+  padding: 12px 0;
+  color: #fff;
+  background-color: #6d8d24;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  display: inline;
+  width:30%;
+}
+input[type="range"]{
+  width: 30%;
 }
 .result {
   font-weight: bold;
   margin-top: 40px;
 }
+/* select{
+  font-size: 16px;
+} */

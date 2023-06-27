@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+  <title>OpenAI</title>
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='logomark_green.png') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+</head>
+
+<body>
+  <img src="{{ url_for('static', filename='PSU_logo_transparent.png') }}" class="icon" />
+  <h3>Use ChatGPT to Analyze Responses.</h3>
+  <form action="/" method="post">
+    <div class="row">
+      <div class="column">
+        
+        <label for="Question">Question:</label><br>
+          <textarea name="Question" placeholder="Enter The Question ..." rows=3 width=80% required></textarea>
+        <br>
+        <label for="Command">Command:</label><br>
+          <textarea name="Command" placeholder="Enter The Command..." rows=2 width=80% required ></textarea>
+        <br>
+        <label for="model">Choose AI Model: </label>
+          <select name="model" id="model">
+            <option value="ada">ada</option>
+            <option value="babbage">babbage</option>
+            <option value="curie">curie</option>
+            <option value="davinci">davinci</option>
+            <option value="text-davinci-002">text-davinci-002</option>
+            <option value="text-davinci-003">text-davinci-003</option>
+            <option value="gpt-3.5-turbo" selected>gpt-3.5-turbo</option>
+            <option value="gpt-4">gpt-4</option>
+          </select>
+          <br>
+        <label for="Temperature">Temperature: </label>
+          <input type="range" name="Temperature" defaultValue=0.6 max=1.0 min=0, step=0.1 oninput="this.nextElementSibling.value = this.value" required />
+          <output>0.6</output>
+      </div>
+      <div class="column">
+        
+        <label for="Correct Answer">Correct Answer:</label><br>
+          <textarea name="Correct Answer" placeholder="Enter The Correct Answer..." rows=5 width=80% required ></textarea>
+         <br>
+        <label for="Student's Answer">Student's Answer:</label><br>
+          <textarea name="Student's Answer" placeholder="Enter The Student's Answer..." rows=5 width=80% required ></textarea>
+          <br>
+        </div>
+    </div>
+    {% if result %}
+    <div class="result">{{ result }}</div>
+    {% endif %}
+    <div>
+        <input type="reset" value="Reset" class="button" onclick="clear_result"/>
+        <input type="submit" value="Submit" class="button"/>
+    </div>
+    <br>   
+    <!-- <label for="Transcript">Transcript File: </label>
+      <input name="Transcript" value="/history/transcript.csv" type="file" accept=".csv"> -->
+  </form>
+  
+
+</body>
