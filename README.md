@@ -1,6 +1,6 @@
 # OpenAI API Quickstart - Python example app
 
-This is an example pet name generator app used in the OpenAI API [quickstart tutorial](https://beta.openai.com/docs/quickstart). It uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework. Check out the tutorial or follow the instructions below to get set up.
+This is an example chat app intended to get you started with your first OpenAI API [quickstart tutorial](https://platform.openai.com/docs/quickstart) project. It uses the Chat Completions API to create a simple general purpose chat.
 
 ## Setup
 
@@ -33,7 +33,7 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
    $ cp .env.example .env
    ```
 
-7. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file.
+7. Add your [API key](https://platform.openai.com/api-keys) to the newly created `.env` file.
 
 8. Run the app:
 
@@ -41,4 +41,4 @@ This is an example pet name generator app used in the OpenAI API [quickstart tut
    $ flask run
    ```
 
-You should now be able to access the app at [http://localhost:5000](http://localhost:5000)! For the full context behind this example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).
+You should now be able to access the app at [http://localhost:5000](http://localhost:5000)!

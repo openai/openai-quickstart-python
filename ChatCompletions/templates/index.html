@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>OpenAI Chat</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+  </head>
+  <body>
+    <h1>OpenAI Chat Completion Quickstart</h1>
+    <div class="chat-container">
+      {% for message in chat_history %}
+      <div
+        class="{{ 'user-message' if message.role == 'user' else 'assistant-message' }}"
+      >
+        {{ message.content }}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="message-input-container">
+      <form action="/" method="post">
+        <textarea
+          name="message"
+          placeholder="Type your message here..."
+          required
+        ></textarea>
+        <input type="submit" value="Send" />
+      </form>
+    </div>
+    <script>
+      window.onload = function () {
+        window.scrollTo(0, document.body.scrollHeight);
+      };
+    </script>
+  </body>
+</html>
