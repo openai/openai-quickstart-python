@@ -1,44 +1,8 @@
 # OpenAI API Quickstart - Python example app
 
-This is an example chat app intended to get you started with your first OpenAI API [quickstart tutorial](https://platform.openai.com/docs/quickstart) project. It uses the Chat Completions API to create a simple general purpose chat.
+This repository contains examples of working with different OpenAI API's in order to help you get up and running quickly. If you are new to the OpenAI API and want to go from setup to your first API call, consider checking our [general developer quickstart guide](https://platform.openai.com/docs/quickstart?context=python).
 
-## Setup
+## Example projects
 
-1. If you don’t have Python installed, [install it from here](https://www.python.org/downloads/).
-
-2. Clone this repository.
-
-3. Navigate into the project directory:
-
-   ```bash
-   $ cd openai-quickstart-python
-   ```
-
-4. Create a new virtual environment:
-
-   ```bash
-   $ python -m venv venv
-   $ . venv/bin/activate
-   ```
-
-5. Install the requirements:
-
-   ```bash
-   $ pip install -r requirements.txt
-   ```
-
-6. Make a copy of the example environment variables file:
-
-   ```bash
-   $ cp .env.example .env
-   ```
-
-7. Add your [API key](https://platform.openai.com/api-keys) to the newly created `.env` file.
-
-8. Run the app:
-
-   ```bash
-   $ flask run
-   ```
-
-You should now be able to access the app at [http://localhost:5000](http://localhost:5000)!
+- [Chat Completions API](/ChatCompletions/)
+- [Assistants API - Coming soon]()

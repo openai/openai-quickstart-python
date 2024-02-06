@@ -92,8 +92,9 @@ form {
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
-  display: flex;
   flex-direction: column;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -106,17 +107,34 @@ textarea {
   min-height: 50px;
   resize: both;
   overflow: auto;
+  margin-right: 4px;
+  flex: 3;
 }
 
-input[type="submit"] {
+.button-group {
+  display: flex;
+}
+
+input[type="submit"],
+input[type="button"] {
   padding: 12px 16px;
-  width: 100%;
   color: #fff;
   background-color: #10a37f;
   border: none;
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  flex: 1;
+  margin: 0 2px;
+}
+
+input[type="submit"] {
+  flex-grow: 4;
+}
+
+input[type="button"] {
+  flex-grow: 1;
+  background-color: #f44336;
 }
 
 input[type="text"] {
