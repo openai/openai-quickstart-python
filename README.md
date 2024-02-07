@@ -1,6 +1,27 @@
 # OpenAI API Quickstart - Python example app
 
-This is an example chat app intended to get you started with your first OpenAI API project. It uses the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) to create a simple general purpose chat interface with streaming.
+This is an example chat app intended to get you started with your first OpenAI API project. It uses the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) to create a simple general purpose chat app with streaming.
+
+## Basic request
+
+To send your first API request with the OpenAI Python SDK, make sure you have the right [dependacies installed](https://platform.openai.com/docs/quickstart?context=python) and then run the following code:
+
+```python
+from openai import OpenAI
+client = OpenAI()
+
+completion = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Hello!"}
+  ]
+)
+
+print(completion.choices[0].message)
+```
+
+This quickstart app builds on top of the example code above, with additional features like streaming.
 
 ## Setup
 
@@ -41,4 +62,4 @@ This is an example chat app intended to get you started with your first OpenAI A
    $ flask run
    ```
 
-You should now be able to access the app at [http://localhost:5000](http://localhost:5000)!
+You should now be able to access the app from your browser at the following URL: [http://localhost:5000](http://localhost:5000)!
