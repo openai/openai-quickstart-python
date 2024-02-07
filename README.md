@@ -1,6 +1,6 @@
 # OpenAI API Quickstart - Python example app
 
-This is an example chat app intended to get you started with your first OpenAI API [quickstart tutorial](https://platform.openai.com/docs/quickstart) project. It uses the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) to create a simple general purpose chat interface.
+This is an example chat app intended to get you started with your first OpenAI API project. It uses the [Chat Completions API](https://platform.openai.com/docs/api-reference/chat) to create a simple general purpose chat interface with streaming.
 
 ## Setup
 
