@@ -1,35 +1,62 @@
-import os
-
+from flask import (
+    Flask,
+    render_template,
+    request,
+    Response,
+    stream_with_context,
+    jsonify,
+)
 import openai
-from flask import Flask, redirect, render_template, request, url_for
+
+client = openai.OpenAI()
 
 app = Flask(__name__)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
+chat_history = [
+    {"role": "system", "content": "You are a helpful assistant."},
+]
 
 
-@app.route("/", methods=("GET", "POST"))
+@app.route("/", methods=["GET"])
 def index():
-    if request.method == "POST":
-        animal = request.form["animal"]
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=generate_prompt(animal),
-            temperature=0.6,
+    return render_template("index.html", chat_history=chat_history)
+
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    content = request.json["message"]
+    chat_history.append({"role": "user", "content": content})
+    return jsonify(success=True)
+
+
+@app.route("/stream", methods=["GET"])
+def stream():
+    def generate():
+        assistant_response_content = ""
+
+        with client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=chat_history,
+            stream=True,
+        ) as stream:
+            for chunk in stream:
+                if chunk.choices[0].delta and chunk.choices[0].delta.content:
+                    # Accumulate the content only if it's not None
+                    assistant_response_content += chunk.choices[0].delta.content
+                    yield f"data: {chunk.choices[0].delta.content}\n\n"
+                if chunk.choices[0].finish_reason == "stop":
+                    break  # Stop if the finish reason is 'stop'
+
+        # Once the loop is done, append the full message to chat_history
+        chat_history.append(
+            {"role": "assistant", "content": assistant_response_content}
         )
-        return redirect(url_for("index", result=response.choices[0].text))
 
-    result = request.args.get("result")
-    return render_template("index.html", result=result)
+    return Response(stream_with_context(generate()), mimetype="text/event-stream")
 
 
-def generate_prompt(animal):
-    return """Suggest three names for an animal that is a superhero.
-
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: {}
-Names:""".format(
-        animal.capitalize()
-    )
+@app.route("/reset", methods=["POST"])
+def reset_chat():
+    global chat_history
+    chat_history = [{"role": "system", "content": "You are a helpful assistant."}]
+    return jsonify(success=True)
