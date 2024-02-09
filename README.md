@@ -37,10 +37,17 @@ This quickstart app builds on top of the example code above, with additional fea
 
 4. Create a new virtual environment:
 
-   ```bash
-   $ python -m venv venv
-   $ . venv/bin/activate
-   ```
+   - macOS:
+     ```bash
+     $ python -m venv venv
+     $ . venv/bin/activate
+     ```
+
+   - Windows:
+     ```cmd
+     > python -m venv venv
+     > .\venv\Scripts\activate
+     ```
 
 5. Install the requirements:
 
