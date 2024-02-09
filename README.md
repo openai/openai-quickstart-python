@@ -4,7 +4,7 @@ This is an example chat app intended to get you started with your first OpenAI A
 
 ## Basic request
 
-To send your first API request with the OpenAI Python SDK, make sure you have the right [dependacies installed](https://platform.openai.com/docs/quickstart?context=python) and then run the following code:
+To send your first API request with the [OpenAI Python SDK](https://github.com/openai/openai-python), make sure you have the right [dependencies installed](https://platform.openai.com/docs/quickstart?context=python) and then run the following code:
 
 ```python
 from openai import OpenAI
@@ -21,13 +21,13 @@ completion = client.chat.completions.create(
 print(completion.choices[0].message)
 ```
 
-This quickstart app builds on top of the example code above, with additional features like streaming.
+This quickstart app builds on top of the example code above, with streaming and a UI to visualize messages.
 
 ## Setup
 
 1. If you don’t have Python installed, install it [from Python.org](https://www.python.org/downloads/).
 
-2. Clone this repository.
+2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) this repository.
 
 3. Navigate into the project directory:
 
