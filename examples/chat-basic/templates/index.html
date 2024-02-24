@@ -8,9 +8,18 @@
     />
   </head>
   <body>
-    <h1>OpenAI Chat Completion Quickstart</h1>
+    <div class="header">
+      <img
+        src="{{ url_for('static', filename='icon.png') }}"
+        alt="OpenAI Logo"
+      />
+      <div class="demo-text">Demo</div>
+    </div>
     <div class="chat-container">
       {% for message in chat_history %}
+      <div class="message-role {{ 'user' if message.role == 'user' else '' }}">
+        {{ message.role.capitalize() }}
+      </div>
       <div
         class="{{ 'user-message' if message.role == 'user' else 'assistant-message' }}"
       >
@@ -26,8 +35,7 @@
           required
         ></textarea>
         <div class="button-group">
-          <input type="submit" value="Send" />
-          <input type="button" id="clear-btn" value="Clear" />
+          <button type="submit" id="send-btn">&#x2191;</button>
         </div>
       </form>
     </div>
@@ -44,6 +52,13 @@
 
           // Append the user's message to the chat container
           if (message) {
+            const roleDiv = document.createElement("div");
+            roleDiv.classList.add("message-role");
+            roleDiv.classList.add("user");
+
+            roleDiv.textContent = "User";
+            chatContainer.appendChild(roleDiv);
+
             const userMessageDiv = document.createElement("div");
             userMessageDiv.classList.add("user-message");
             userMessageDiv.textContent = message;
@@ -52,11 +67,6 @@
 
           // Clear the message input
           messageInput.value = "";
-
-          // Prepare the assistant's message container
-          const assistantMessageDiv = document.createElement("div");
-          assistantMessageDiv.classList.add("assistant-message");
-          chatContainer.appendChild(assistantMessageDiv);
 
           // Send the user's message to the server using AJAX
           fetch("/chat", {
@@ -69,6 +79,18 @@
             .then((response) => response.json())
             .then((data) => {
               if (data.success) {
+                const roleDiv = document.createElement("div");
+                roleDiv.classList.add("message-role");
+                roleDiv.classList.add("assistant");
+
+                roleDiv.textContent = "Assistant";
+                chatContainer.appendChild(roleDiv);
+
+                // Prepare the assistant's message container
+                const assistantMessageDiv = document.createElement("div");
+                assistantMessageDiv.classList.add("assistant-message");
+                chatContainer.appendChild(assistantMessageDiv);
+
                 // Open a connection to receive streamed responses
                 const eventSource = new EventSource("/stream");
                 eventSource.onmessage = function (event) {
