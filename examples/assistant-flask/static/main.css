@@ -51,7 +51,7 @@ h3 {
   width: 70%;
   padding: 20px;
   margin: 0 auto;
-  padding-top: 20px;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -72,12 +72,12 @@ h3 {
 }
 
 .user-message {
-  align-self: flex-end;
+  align-self: flex-end !important;
   background-color: #f7f7f8;
 }
 
 .assistant-message {
-  align-self: flex-start;
+  align-self: flex-start !important;
   background-color: #ebfaeb;
 }
 
@@ -360,4 +360,6 @@ body::after {
 .messages {
   flex-grow: 1; /* Allow this container to take up available space */
   overflow-y: auto; /* Scroll if content exceeds height */
+  display: flex;
+  flex-direction: column;
 }
