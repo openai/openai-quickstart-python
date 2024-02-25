@@ -374,9 +374,20 @@ body::after {
 
 .file-entry {
   display: flex;
+  justify-content: space-between;
   align-items: center; /* Vertically center the items */
   gap: 10px; /* Add some space between the icon and the text */
   padding-bottom: 15px;
+}
+
+.file-entry div {
+  display: flex;
+  align-items: center;
+}
+
+.file-entry span {
+  flex-grow: 1; /* Allows the file ID to take up any available space */
+  margin: 0 10px; /* Adds some spacing around the file ID */
 }
 
 #filesDivider {
