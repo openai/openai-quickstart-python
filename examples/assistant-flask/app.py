@@ -11,14 +11,12 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif", "csv"}
 
 # Initialize the Assistant and Thread globally
-assistant_id = ""
+assistant_id = "asst_SAAVRfvPF8NZ3JDryeqZ0ag7"
 thread_id = ""
 
 chat_history = [
     {"role": "system", "content": "You are a helpful assistant."},
 ]
-
-files_to_attach = []
 
 
 def allowed_file(filename):
@@ -33,20 +31,28 @@ def upload_file():
 
     file = request.files["file"]
 
-    global files_to_attach
+    global assistant_id
 
     if file.filename == "":
         return jsonify(success=False, message="No selected file")
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
 
-        # Upload the file and add the ID to the list which we will append to the next message
+        # Upload the file and add it to the Assistant (you could also add it to the message)
         uploaded_file = client.files.create(file=file.stream, purpose="assistants")
-        files_to_attach.append(uploaded_file.id)
+        assistant_files = client.beta.assistants.files.list(assistant_id=assistant_id)
+
+        file_ids = [file.id for file in assistant_files.data]
+        file_ids.append(uploaded_file.id)
+
+        client.beta.assistants.update(
+            assistant_id,
+            file_ids=file_ids,
+        )
 
         return jsonify(
             success=True,
-            message="File uploaded successfully and added to the Thread",
+            message="File uploaded successfully and added to the Assistant",
             filename=filename,
         )
     return jsonify(success=False, message="File type not allowed")
@@ -65,13 +71,30 @@ def get_messages():
             {
                 "role": msg.role,
                 "content": msg.content[0].text.value,
-                "file_ids": msg.file_ids,
             }
             for msg in thread_messages.data
         ]
         return jsonify(success=True, messages=messages)
     else:
         return jsonify(success=False, message="No thread ID")
+
+
+@app.route("/get_files", methods=["GET"])
+def get_files():
+    global assistant_id
+    assistant_files = client.beta.assistants.files.list(assistant_id=assistant_id)
+    print(assistant_files)
+
+    files_list = []
+    for file in assistant_files.data:
+        files_list.append(
+            {
+                "id": file.id,
+                "object": file.object,
+                "created_at": file.created_at,
+            }
+        )
+    return jsonify(assistant_files=files_list)
 
 
 def create_assistant():
@@ -115,9 +138,6 @@ def chat():
 
     # Send the message to the assistant
     message_params = {"thread_id": thread_id, "role": "user", "content": content}
-
-    if files_to_attach:
-        message_params["file_ids"] = files_to_attach
 
     thread_message = client.beta.threads.messages.create(**message_params)
 
