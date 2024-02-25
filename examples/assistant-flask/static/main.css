@@ -54,8 +54,6 @@ h3 {
   padding-top: 20px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 160px;
-  margin-bottom: 20px;
   overflow: hidden;
   float: right;
   overflow-y: auto;
@@ -84,11 +82,8 @@ h3 {
 }
 
 .message-input-container {
-  position: fixed;
-  bottom: 0;
-  right: 0; /* Align to the right edge of the viewport */
-  width: 60%; /* Match the chat container's width */
-  padding: 20px;
+  position: relative;
+  width: 100%; /* Match the chat container's width */
   background: #fff;
   box-sizing: border-box;
   display: flex;
