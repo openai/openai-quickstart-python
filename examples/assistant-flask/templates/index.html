@@ -8,27 +8,59 @@
     />
   </head>
   <body>
-    <div class="header">
-      <img
-        src="{{ url_for('static', filename='icon.png') }}"
-        alt="OpenAI Logo"
-      />
-      <div class="demo-text">Demo</div>
-    </div>
     <div id="upload-banner">
       <!-- Success message will be inserted here -->
     </div>
-    <div class="chat-container">
-      {% for message in chat_history %}
-      <div class="message-role {{ 'user' if message.role == 'user' else '' }}">
-        {{ message.role.capitalize() }}
+    <div class="main-content">
+      <div class="file-upload-section">
+        <div class="header">
+          <img
+            src="{{ url_for('static', filename='icon.png') }}"
+            alt="OpenAI Logo"
+          />
+          <div class="demo-text">Demo</div>
+        </div>
+        <div class="centered-text">
+          <p>Attach files to make them available to code interpreter</p>
+        </div>
+        <div class="flex-spacer"></div>
+        <input
+          type="file"
+          id="file-upload"
+          name="file-upload"
+          class="file-upload-input"
+          multiple
+        />
+        <label for="file-upload" class="file-upload-btn">Attach files</label>
       </div>
-      <div
-        class="{{ 'user-message' if message.role == 'user' else 'assistant-message' }}"
-      >
-        {{ message.content }}
+      <div class="chat-container">
+        <div class="messages">
+          {% for message in chat_history %}
+          <div
+            class="message-role {{ 'user' if message.role == 'user' else '' }}"
+          >
+            {{ message.role.capitalize() }}
+          </div>
+          <div
+            class="{{ 'user-message' if message.role == 'user' else 'assistant-message' }}"
+          >
+            {{ message.content }}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="message-input-container">
+          <form action="/chat" method="post">
+            <textarea
+              name="message"
+              placeholder="Enter your message"
+              required
+            ></textarea>
+            <div class="button-group">
+              <button type="submit" id="send-btn">&#x2191;</button>
+            </div>
+          </form>
+        </div>
       </div>
-      {% endfor %}
     </div>
     <div id="fileModal" class="modal">
       <!-- Modal content -->
@@ -38,18 +70,6 @@
         <ul id="fileList"></ul>
       </div>
     </div>
-    <div class="message-input-container">
-      <form action="/chat" method="post">
-        <textarea
-          name="message"
-          placeholder="Enter your message"
-          required
-        ></textarea>
-        <div class="button-group">
-          <button type="submit" id="send-btn">&#x2191;</button>
-        </div>
-      </form>
-    </div>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Check if there are messages to load
@@ -57,7 +77,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.success) {
-              const chatContainer = document.querySelector(".chat-container");
+              const chatContainer = document.querySelector(".messages");
               data.messages.forEach((msg) => {
                 const roleDiv = document.createElement("div");
                 roleDiv.classList.add("message-role");
@@ -131,51 +151,51 @@
           });
       });
 
-      // document
-      //   .getElementById("file-upload")
-      //   .addEventListener("change", function (event) {
-      //     const file = event.target.files[0];
-      //     if (!file) {
-      //       return;
-      //     }
-      //     const formData = new FormData();
-      //     formData.append("file", file);
+      document
+        .getElementById("file-upload")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (!file) {
+            return;
+          }
+          const formData = new FormData();
+          formData.append("file", file);
 
-      //     fetch("/upload", {
-      //       method: "POST",
-      //       body: formData,
-      //     })
-      //       .then((response) => response.json())
-      //       .then((data) => {
-      //         if (data.success) {
-      //           // Update and show the banner
-      //           const banner = document.getElementById("upload-banner");
-      //           banner.textContent = data.message;
-      //           banner.style.display = "block";
+          fetch("/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                // Update and show the banner
+                const banner = document.getElementById("upload-banner");
+                banner.textContent = data.message;
+                banner.style.display = "block";
 
-      //           // Hide the banner after 3 seconds
-      //           setTimeout(() => {
-      //             banner.style.display = "none";
-      //           }, 3000);
-      //         } else {
-      //           // Handle failure (optional)
-      //           console.error("Upload failed:", data.message);
-      //           // Update and show the banner
-      //           const banner = document.getElementById("upload-banner");
-      //           banner.textContent = data.message;
-      //           banner.style.display = "block";
-      //           banner.style.color = "red";
+                // Hide the banner after 3 seconds
+                setTimeout(() => {
+                  banner.style.display = "none";
+                }, 3000);
+              } else {
+                // Handle failure (optional)
+                console.error("Upload failed:", data.message);
+                // Update and show the banner
+                const banner = document.getElementById("upload-banner");
+                banner.textContent = data.message;
+                banner.style.display = "block";
+                banner.style.color = "red";
 
-      //           // Hide the banner after 3 seconds
-      //           setTimeout(() => {
-      //             banner.style.display = "none";
-      //           }, 3500);
-      //         }
-      //       })
-      //       .catch((error) => {
-      //         console.error("Error uploading file:", error);
-      //       });
-      //   });
+                // Hide the banner after 3 seconds
+                setTimeout(() => {
+                  banner.style.display = "none";
+                }, 3500);
+              }
+            })
+            .catch((error) => {
+              console.error("Error uploading file:", error);
+            });
+        });
       document
         .querySelector("form")
         .addEventListener("submit", function (event) {
@@ -184,7 +204,7 @@
             'textarea[name="message"]'
           );
           const message = messageInput.value.trim();
-          const chatContainer = document.querySelector(".chat-container");
+          const chatContainer = document.querySelector(".messages");
           // Append the user's message to the chat container
           if (message) {
             const roleDiv = document.createElement("div");

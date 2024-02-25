@@ -25,8 +25,13 @@ input {
 
 body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column; /* Change to row to align children horizontally */
+  align-items: stretch; /* Align items at the start of the cross axis */
+  justify-content: center; /* Center items on the main axis */
+  width: 100%; /* Ensure full width */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  overflow: hidden;
 }
 
 .icon {
@@ -43,15 +48,19 @@ h3 {
 
 .chat-container {
   max-width: 600px;
-  width: 100%;
+  width: 70%;
+  padding: 20px;
   margin: 0 auto;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding-bottom: 160px;
   margin-bottom: 20px;
-  overflow: auto;
+  overflow: hidden;
+  float: right;
+  overflow-y: auto;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
 
 .user-message,
@@ -77,15 +86,15 @@ h3 {
 .message-input-container {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  right: 0; /* Align to the right edge of the viewport */
+  width: 60%; /* Match the chat container's width */
   padding: 20px;
   background: #fff;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
-  height: auto;
-  box-sizing: border-box;
   align-items: start;
+  z-index: 100;
 }
 
 .message-input-container form {
@@ -191,20 +200,6 @@ input[type="text"] {
   justify-content: space-between; /* Adjust as needed */
 }
 
-.file-upload-btn {
-  background: #007bff;
-  color: white;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.file-upload-btn:hover {
-  background: #0056b3;
-}
-
 .file-upload-input {
   display: none; /* Hide the actual input */
 }
@@ -274,12 +269,12 @@ input[type="text"] {
 }
 
 .header {
-  display: flex; /* Use flexbox layout */
-  align-items: center; /* Center items vertically */
-  justify-content: flex-start; /* Align items to the start of the container */
   background-color: white;
-  width: 100%; /* Ensure the header spans the full width */
-  padding: 10px 0; /* Add some vertical padding */
+  width: 100%;
+  padding: 10px 0;
+  display: flex; /* Add this line */
+  align-items: center; /* Center items vertically */
+  justify-content: start;
 }
 
 .header img {
@@ -314,4 +309,64 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.file-upload-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Adjust content distribution */
+  align-items: center; /* Center content horizontally */
+  padding: 20px;
+  box-sizing: border-box;
+  border-right: 1px solid #c5c5d2; /* Optional: border to separate from the chat section */
+}
+.centered-text {
+  margin-top: 100px;
+  justify-content: center;
+  text-align: center; /* Center the text inside the div */
+  width: 100%; /* Ensure the div takes up the full width */
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.file-upload-btn,
+.file-upload-input + label {
+  margin-top: auto; /* Push the button to the bottom */
+  width: calc(
+    100% - 40px
+  ); /* Adjust width to ensure it fits within the parent's padding */
+  padding: 4px 8px;
+  cursor: pointer;
+  background-color: #10a37f;
+  color: white;
+  border: none;
+  max-height: 32px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Clear floats */
+body::after {
+  content: none;
+}
+
+.file-upload-section,
+.chat-container {
+  float: none;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row; /* Align children (file upload section and chat container) horizontally */
+  height: 100vh; /* Adjust height based on header height */
+  overflow: auto; /* Allow scrolling within this container */
+  align-items: stretch;
+}
+
+.messages {
+  flex-grow: 1; /* Allow this container to take up available space */
+  overflow-y: auto; /* Scroll if content exceeds height */
 }
