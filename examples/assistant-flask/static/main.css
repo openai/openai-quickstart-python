@@ -314,21 +314,17 @@ input[type="text"] {
 .file-upload-section {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Adjust content distribution */
+  justify-content: space-around; /* Adjust content distribution */
   align-items: center; /* Center content horizontally */
   padding: 20px;
   box-sizing: border-box;
   border-right: 1px solid #c5c5d2; /* Optional: border to separate from the chat section */
 }
 .centered-text {
-  margin-top: 100px;
-  justify-content: center;
+  margin-top: 85%;
+  padding: 20px;
   text-align: center; /* Center the text inside the div */
   width: 100%; /* Ensure the div takes up the full width */
-}
-
-.flex-spacer {
-  flex-grow: 1;
 }
 
 .file-upload-btn,
