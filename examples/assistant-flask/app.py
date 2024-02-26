@@ -5,13 +5,13 @@ import time
 
 from openai import OpenAI
 
-client = OpenAI(organization="org-TNEr0bq7f6A7IZUTdPLpZ6Xu")
+client = OpenAI()
 
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif", "csv"}
 
 # Initialize the Assistant and Thread globally
-assistant_id = "asst_SAAVRfvPF8NZ3JDryeqZ0ag7"
+assistant_id = ""
 thread_id = ""
 
 chat_history = [
@@ -77,6 +77,19 @@ def get_messages():
         return jsonify(success=True, messages=messages)
     else:
         return jsonify(success=False, message="No thread ID")
+
+
+@app.route("/delete_files", methods=["POST"])
+def delete_files():
+    file_id = request.json.get("fileId")
+    deleted_assistant_file = client.beta.assistants.files.delete(
+        assistant_id=assistant_id, file_id=file_id
+    )
+    print("Deleted: ", deleted_assistant_file.deleted)
+    if deleted_assistant_file.deleted == True:
+        return jsonify(success=True, messages="File deleted!")
+    else:
+        return jsonify(success=False, messages="File failed to be deleted.")
 
 
 @app.route("/get_files", methods=["GET"])
