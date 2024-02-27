@@ -165,10 +165,21 @@ def chat():
 
     response = client.beta.threads.messages.list(thread_id).data[0]
 
-    chat_history.append(
-        {"role": "assistant", "content": response.content[0].text.value}
-    )
-    return jsonify(success=True, message=response.content[0].text.value)
+    text_content = None
+
+    # Iterate through the content objects to find the first text content
+    for content in response.content:
+        if content.type == "text":
+            text_content = content.text.value
+            break  # Exit the loop once the first text content is found
+
+    # Check if text content was found
+    if text_content:
+        chat_history.append({"role": "assistant", "content": text_content})
+        return jsonify(success=True, message=text_content)
+    else:
+        # Handle the case where no text content is found
+        return jsonify(success=False, message="No text content found")
 
 
 @app.route("/reset", methods=["POST"])

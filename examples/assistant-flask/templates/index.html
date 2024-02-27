@@ -79,7 +79,7 @@
       </div>
     </div>
     <script>
-      function TestTest(fileId) {
+      function deleteFiles(fileId) {
         fetch("/delete_files", {
           method: "POST",
           headers: {
@@ -111,6 +111,7 @@
 
         // If there are files, show the placeholder by removing the 'hidden' class
         if (assistant_files.length > 0) {
+          document.getElementById("filesList").style.display = "block";
           filesPlaceholder.classList.remove("hidden");
 
           document.querySelector(".centered-text").style.display = "none";
@@ -122,6 +123,7 @@
           }
         } else {
           document.querySelector(".centered-text").style.display = "block";
+          document.getElementById("filesList").style.display = "none";
           filesPlaceholder.classList.add("hidden");
           return;
         }
@@ -149,7 +151,7 @@
           </svg>
           `;
           svgIconRight.addEventListener("click", () =>
-            TestTest(fileIdSpan.textContent)
+            deleteFiles(fileIdSpan.textContent)
           );
 
           fileEntry.appendChild(svgIconLeft);
