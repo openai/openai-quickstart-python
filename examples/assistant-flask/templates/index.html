@@ -8,56 +8,167 @@
     />
   </head>
   <body>
-    <div class="header">
-      <img
-        src="{{ url_for('static', filename='icon.png') }}"
-        alt="OpenAI Logo"
-      />
-      <div class="demo-text">Demo</div>
-    </div>
     <div id="upload-banner">
       <!-- Success message will be inserted here -->
     </div>
-    <div class="chat-container">
-      {% for message in chat_history %}
-      <div class="message-role {{ 'user' if message.role == 'user' else '' }}">
-        {{ message.role.capitalize() }}
-      </div>
-      <div
-        class="{{ 'user-message' if message.role == 'user' else 'assistant-message' }}"
-      >
-        {{ message.content }}
-      </div>
-      {% endfor %}
-    </div>
-    <div id="fileModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Files:</p>
-        <ul id="fileList"></ul>
-      </div>
-    </div>
-    <div class="message-input-container">
-      <form action="/chat" method="post">
-        <textarea
-          name="message"
-          placeholder="Enter your message"
-          required
-        ></textarea>
-        <div class="button-group">
-          <button type="submit" id="send-btn">&#x2191;</button>
+    <div class="main-content">
+      <div class="file-upload-section">
+        <div class="header">
+          <img
+            src="{{ url_for('static', filename='icon.png') }}"
+            alt="OpenAI Logo"
+          />
+          <div class="demo-text">Demo</div>
         </div>
-      </form>
+        <div id="filesList">
+          <p id="filesPlaceholder" class="hidden">Files</p>
+        </div>
+        <div class="centered-text">
+          <svg
+            width="39"
+            height="38"
+            viewBox="0 0 39 38"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M30.5641 4.04786C29.9974 4.00156 29.2529 4.00001 28.0998 4.00001H17.5002C17.0998 6 16.6975 7.82282 16.2803 9.70819C16.0173 10.8991 15.7862 11.9461 15.2348 12.828C14.7521 13.6002 14.0999 14.2524 13.3277 14.7351C12.4458 15.2864 11.3989 15.5176 10.2079 15.7805C10.1253 15.7988 10.0419 15.8172 9.95788 15.8359L4.93362 16.9524C4.78815 16.9847 4.64286 17.0003 4.49976 17.0004V27.6C4.49976 28.7531 4.50131 29.4977 4.54761 30.0643C4.59201 30.6077 4.66736 30.8091 4.71775 30.908C4.90949 31.2843 5.21545 31.5903 5.59178 31.782C5.69067 31.8324 5.89211 31.9078 6.43543 31.9521C7.00211 31.9984 7.74665 32 8.89976 32H14.4998C15.6043 32 16.4998 32.8954 16.4998 34C16.4998 35.1046 15.6043 36 14.4998 36H8.82263C7.76835 36 6.85884 36.0001 6.1097 35.9389C5.31901 35.8743 4.53258 35.7316 3.77582 35.346C2.64684 34.7708 1.72896 33.8529 1.15372 32.7239C0.768132 31.9672 0.6255 31.1807 0.560898 30.3901C0.499691 29.6409 0.499722 28.7314 0.499758 27.6771L0.499759 16C0.499759 11.8495 2.55485 7.86649 5.46055 4.96079C8.36624 2.0551 12.3493 7.44227e-06 16.4998 7.44227e-06L28.1768 5.53492e-06C29.2311 -3.02279e-05 30.1407 -6.12214e-05 30.8898 0.0611463C31.6805 0.125748 32.4669 0.26838 33.2237 0.653969C34.3527 1.22921 35.2706 2.14709 35.8458 3.27606C36.2314 4.03282 36.374 4.81926 36.4386 5.60995C36.4998 6.35908 36.4998 7.2686 36.4998 8.32287V14C36.4998 15.1046 35.6043 16 34.4998 16C33.3952 16 32.4998 15.1046 32.4998 14V8.40001C32.4998 7.2469 32.4982 6.50235 32.4519 5.93568C32.4075 5.39235 32.3322 5.19091 32.2818 5.09203C32.09 4.7157 31.7841 4.40974 31.4077 4.21799C31.3089 4.16761 31.1074 4.09225 30.5641 4.04786ZM5.06003 12.8267L9.09016 11.9311C10.677 11.5785 10.9859 11.4818 11.2074 11.3433C11.4648 11.1824 11.6822 10.965 11.8431 10.7076C11.9815 10.4862 12.0783 10.1772 12.4309 8.5904L13.3265 4.56028C11.52 5.18578 9.77023 6.30796 8.28897 7.78922C6.80771 9.27048 5.68553 11.0203 5.06003 12.8267ZM28.4998 24C28.4998 22.8954 29.3952 22 30.4998 22C31.6043 22 32.4998 22.8954 32.4998 24V28H36.4998C37.6043 28 38.4998 28.8954 38.4998 30C38.4998 31.1046 37.6043 32 36.4998 32H32.4998V36C32.4998 37.1046 31.6043 38 30.4998 38C29.3952 38 28.4998 37.1046 28.4998 36V32H24.4998C23.3952 32 22.4998 31.1046 22.4998 30C22.4998 28.8954 23.3952 28 24.4998 28H28.4998V24Z"
+              fill="#6E6E80"
+            />
+          </svg>
+          <p>Attach files to make them available to code interpreter</p>
+        </div>
+        <input
+          type="file"
+          id="file-upload"
+          name="file-upload"
+          class="file-upload-input"
+          multiple
+        />
+        <label for="file-upload" class="file-upload-btn">Attach files</label>
+      </div>
+      <div class="chat-container">
+        <div class="messages">
+          {% for message in chat_history %}
+          <div
+            class="message-role {{ 'user' if message.role == 'user' else '' }}"
+          >
+            {{ message.role.capitalize() }}
+          </div>
+          <div
+            class="{{ 'user-message' if message.role == 'user' else 'assistant-message' }}"
+          >
+            {{ message.content }}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="message-input-container">
+          <form action="/chat" method="post">
+            <textarea
+              name="message"
+              placeholder="Enter your message"
+              required
+            ></textarea>
+            <div class="button-group">
+              <button type="submit" id="send-btn">&#x2191;</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <script>
+      function deleteFiles(fileId) {
+        fetch("/delete_files", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Set Content-Type to application/json
+          },
+          body: JSON.stringify({ fileId: fileId }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            if (data.success) {
+              const fileEntries = document.querySelectorAll(".file-entry span");
+              fileEntries.forEach((entry) => {
+                if (entry.textContent === fileId) {
+                  entry.parentNode.remove();
+                }
+              });
+              fetch("/get_files")
+                .then((response) => response.json())
+                .then((data) => {
+                  populateFiles(data.assistant_files);
+                });
+            }
+          });
+      }
+      function populateFiles(assistant_files) {
+        let filesDiv = document.getElementById("filesList");
+        let filesPlaceholder = document.getElementById("filesPlaceholder");
+
+        // If there are files, show the placeholder by removing the 'hidden' class
+        if (assistant_files.length > 0) {
+          document.getElementById("filesList").style.display = "block";
+          filesPlaceholder.classList.remove("hidden");
+
+          document.querySelector(".centered-text").style.display = "none";
+          // Ensure the divider is only added once
+          if (!document.getElementById("filesDivider")) {
+            const divider = document.createElement("hr");
+            divider.id = "filesDivider";
+            filesDiv.appendChild(divider);
+          }
+        } else {
+          document.querySelector(".centered-text").style.display = "block";
+          document.getElementById("filesList").style.display = "none";
+          filesPlaceholder.classList.add("hidden");
+          return;
+        }
+
+        // Clear any existing file entries
+        document.querySelectorAll(".file-entry").forEach((p) => p.remove());
+
+        // Populate the Files Div
+        assistant_files.forEach((file) => {
+          const fileEntry = document.createElement("div");
+          fileEntry.classList.add("file-entry");
+
+          const svgIconLeft = document.createElement("div");
+          svgIconLeft.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="8" fill="#ECECF1"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.66675 5.33279C7.56218 5.33279 6.66675 6.22822 6.66675 7.33279V16.6661C6.66675 17.7707 7.56218 18.6661 8.66675 18.6661H15.3334C16.438 18.6661 17.3334 17.7707 17.3334 16.6661V9.88508C17.3334 9.35465 17.1227 8.84594 16.7476 8.47087L14.1953 5.91858C13.8203 5.54351 13.3116 5.33279 12.7811 5.33279H8.66675ZM12.0001 6.66613H8.66675C8.29856 6.66613 8.00008 6.9646 8.00008 7.33279V16.6661C8.00008 17.0343 8.29856 17.3328 8.66675 17.3328H15.3334C15.7016 17.3328 16.0001 17.0343 16.0001 16.6661V10.6661H14.0001C12.8955 10.6661 12.0001 9.7707 12.0001 8.66613V6.66613ZM15.7239 9.33279H14.0001C13.6319 9.33279 13.3334 9.03432 13.3334 8.66613V6.94227L15.7239 9.33279Z" fill="#353740"/>
+          </svg>`;
+
+          const fileIdSpan = document.createElement("span");
+          fileIdSpan.textContent = file.id;
+
+          const svgIconRight = document.createElement("div");
+          svgIconRight.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M5.15736 1.33332C4.8911 1.33332 4.65864 1.51361 4.59238 1.77149L4.4214 2.43693H7.58373L7.41275 1.77149C7.34649 1.51361 7.11402 1.33332 6.84777 1.33332H5.15736ZM8.78829 2.43693L8.54271 1.48115C8.34393 0.707516 7.64653 0.166656 6.84777 0.166656H5.15736C4.35859 0.166656 3.6612 0.707515 3.46241 1.48115L3.21683 2.43693H1.33333C1.01117 2.43693 0.75 2.6981 0.75 3.02026C0.75 3.34243 1.01117 3.6036 1.33333 3.6036H1.39207L2.10068 10.2683C2.19529 11.1582 2.94599 11.8333 3.84087 11.8333H8.15913C9.05401 11.8333 9.80471 11.1582 9.89932 10.2683L10.6079 3.6036H10.6667C10.9888 3.6036 11.25 3.34243 11.25 3.02026C11.25 2.6981 10.9888 2.43693 10.6667 2.43693H8.78829ZM9.43469 3.6036H2.56531L3.2608 10.145C3.29234 10.4416 3.54257 10.6667 3.84087 10.6667H8.15913C8.45743 10.6667 8.70766 10.4416 8.7392 10.145L9.43469 3.6036ZM4.83333 4.83332C5.1555 4.83332 5.41667 5.09449 5.41667 5.41666V8.33332C5.41667 8.65549 5.1555 8.91666 4.83333 8.91666C4.51117 8.91666 4.25 8.65549 4.25 8.33332V5.41666C4.25 5.09449 4.51117 4.83332 4.83333 4.83332ZM7.16667 4.83332C7.48883 4.83332 7.75 5.09449 7.75 5.41666V8.33332C7.75 8.65549 7.48883 8.91666 7.16667 8.91666C6.8445 8.91666 6.58333 8.65549 6.58333 8.33332V5.41666C6.58333 5.09449 6.8445 4.83332 7.16667 4.83332Z" fill="#353740"/>
+          </svg>
+          `;
+          svgIconRight.addEventListener("click", () =>
+            deleteFiles(fileIdSpan.textContent)
+          );
+
+          fileEntry.appendChild(svgIconLeft);
+          fileEntry.appendChild(fileIdSpan);
+          fileEntry.appendChild(svgIconRight);
+
+          filesDiv.appendChild(fileEntry);
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
         // Check if there are messages to load
         fetch("/get_messages")
           .then((response) => response.json())
           .then((data) => {
             if (data.success) {
-              const chatContainer = document.querySelector(".chat-container");
+              const chatContainer = document.querySelector(".messages");
               data.messages.forEach((msg) => {
                 const roleDiv = document.createElement("div");
                 roleDiv.classList.add("message-role");
@@ -74,48 +185,10 @@
                 );
                 messageDiv.textContent = msg.content;
 
-                // Check if there are file IDs and append them
-                if (msg.file_ids.length > 0) {
-                  const fileIcon = document.createElement("span");
-                  fileIcon.innerHTML = "&#128194;"; // File folder emoji as icon
-                  fileIcon.classList.add("file-icon");
-                  fileIcon.onclick = function () {
-                    showFiles(msg.file_ids);
-                  };
-                  messageDiv.appendChild(fileIcon);
-                }
-
                 chatContainer.appendChild(messageDiv);
               });
             }
           });
-
-        // Modal script
-        var modal = document.getElementById("fileModal");
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-          modal.style.display = "none";
-        };
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        };
-
-        function showFiles(fileIds) {
-          const fileList = document.getElementById("fileList");
-          fileList.innerHTML = ""; // Clear existing list items
-          fileIds.forEach((fileId) => {
-            const li = document.createElement("li");
-            li.textContent = fileId;
-            fileList.appendChild(li);
-          });
-          document.getElementById("fileModal").style.display = "block";
-        }
 
         fetch("/get_ids")
           .then((response) => response.json())
@@ -129,53 +202,64 @@
               data.thread_id
             );
           });
+
+        fetch("/get_files")
+          .then((response) => response.json())
+          .then((data) => {
+            populateFiles(data.assistant_files);
+          });
       });
 
-      // document
-      //   .getElementById("file-upload")
-      //   .addEventListener("change", function (event) {
-      //     const file = event.target.files[0];
-      //     if (!file) {
-      //       return;
-      //     }
-      //     const formData = new FormData();
-      //     formData.append("file", file);
+      document
+        .getElementById("file-upload")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (!file) {
+            return;
+          }
+          const formData = new FormData();
+          formData.append("file", file);
 
-      //     fetch("/upload", {
-      //       method: "POST",
-      //       body: formData,
-      //     })
-      //       .then((response) => response.json())
-      //       .then((data) => {
-      //         if (data.success) {
-      //           // Update and show the banner
-      //           const banner = document.getElementById("upload-banner");
-      //           banner.textContent = data.message;
-      //           banner.style.display = "block";
+          fetch("/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                // Update and show the banner
+                const banner = document.getElementById("upload-banner");
+                banner.textContent = data.message;
+                banner.style.display = "block";
 
-      //           // Hide the banner after 3 seconds
-      //           setTimeout(() => {
-      //             banner.style.display = "none";
-      //           }, 3000);
-      //         } else {
-      //           // Handle failure (optional)
-      //           console.error("Upload failed:", data.message);
-      //           // Update and show the banner
-      //           const banner = document.getElementById("upload-banner");
-      //           banner.textContent = data.message;
-      //           banner.style.display = "block";
-      //           banner.style.color = "red";
+                // Hide the banner after 3 seconds
+                setTimeout(() => {
+                  banner.style.display = "none";
+                }, 3000);
 
-      //           // Hide the banner after 3 seconds
-      //           setTimeout(() => {
-      //             banner.style.display = "none";
-      //           }, 3500);
-      //         }
-      //       })
-      //       .catch((error) => {
-      //         console.error("Error uploading file:", error);
-      //       });
-      //   });
+                fetch("/get_files")
+                  .then((response) => response.json())
+                  .then((data) => {
+                    populateFiles(data.assistant_files);
+                  });
+              } else {
+                console.error("Upload failed:", data.message);
+                // Update and show the banner
+                const banner = document.getElementById("upload-banner");
+                banner.textContent = data.message;
+                banner.style.display = "block";
+                banner.style.color = "red";
+
+                // Hide the banner after 3 seconds
+                setTimeout(() => {
+                  banner.style.display = "none";
+                }, 3500);
+              }
+            })
+            .catch((error) => {
+              console.error("Error uploading file:", error);
+            });
+        });
       document
         .querySelector("form")
         .addEventListener("submit", function (event) {
@@ -184,7 +268,7 @@
             'textarea[name="message"]'
           );
           const message = messageInput.value.trim();
-          const chatContainer = document.querySelector(".chat-container");
+          const chatContainer = document.querySelector(".messages");
           // Append the user's message to the chat container
           if (message) {
             const roleDiv = document.createElement("div");
@@ -253,27 +337,6 @@
           // Scroll to the bottom of the chat container
           chatContainer.scrollTop = chatContainer.scrollHeight;
         });
-      // Add event listener for the clear button
-      // document
-      //   .getElementById("clear-btn")
-      //   .addEventListener("click", function () {
-      //     // Clear the chat container
-      //     const chatContainer = document.querySelector(".chat-container");
-      //     chatContainer.innerHTML = "";
-      //     // Re-insert the initial system message as an assistant message
-      //     const systemMessageDiv = document.createElement("div");
-      //     systemMessageDiv.classList.add("assistant-message");
-      //     systemMessageDiv.textContent = "You are a helpful assistant.";
-      //     chatContainer.appendChild(systemMessageDiv);
-      //     // Reset the chat history on the server
-      //     fetch("/reset", {
-      //       method: "POST",
-      //     }).then((response) => {
-      //       if (response.ok) {
-      //         console.log("Chat history has been reset.");
-      //       }
-      //     });
-      //   });
     </script>
   </body>
 </html>
