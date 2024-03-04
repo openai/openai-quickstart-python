@@ -45,7 +45,10 @@ def run_assistant(thread_id, assistant_id):
 
 
 def get_newest_message(thread_id):
-    thread_messages = client.beta.threads.messages.list(thread_id)
+    thread_messages = client.beta.threads.messages.list(
+        thread_id=thread_id,
+        order="asc"
+    )
     return thread_messages.data[0]
 
 
