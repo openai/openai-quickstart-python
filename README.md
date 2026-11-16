@@ -2,6 +2,10 @@
 
 This repository hosts multiple quickstart apps for different OpenAI API endpoints (chat, assistants, etc). Check out the `examples` folder to try out different examples and get started using the OpenAI API.
 
+> **Assistants examples are no longer runnable.** The Assistants API was sunset on
+> August 26, 2026. The `examples/assistant-*` apps use that API; for new
+> integrations, use the Responses API and see the [Assistants migration guide](https://developers.openai.com/api/docs/assistants/migration).
+
 ## Basic request
 
 To send your first API request with the [OpenAI Python SDK](https://github.com/openai/openai-python), make sure you have the right [dependencies installed](https://platform.openai.com/docs/quickstart?context=python) and then run the following code:
