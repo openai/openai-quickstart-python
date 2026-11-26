@@ -107,44 +107,27 @@ def get_run_status(thread_id, run_id):
 def run_action(thread_id, run_id):
     run = client.beta.threads.runs.retrieve(thread_id=thread_id, run_id=run_id)
 
+    tool_outputs = []
     for tool in run.required_action.submit_tool_outputs.tool_calls:
-
         if tool.function.name == "getCurrentWeather":
             arguments = json.loads(tool.function.arguments)
-            location = arguments["location"]
-
-            weather_info = get_current_weather(location)
-
-            client.beta.threads.runs.submit_tool_outputs(
-                thread_id=thread_id,
-                run_id=run.id,
-                tool_outputs=[
-                    {
-                        "tool_call_id": tool.id,
-                        "output": weather_info,
-                    },
-                ],
-            )
+            output = get_current_weather(arguments["location"])
         elif tool.function.name == "getNickname":
             arguments = json.loads(tool.function.arguments)
-            location = arguments["location"]
-
-            name_info = get_nickname(location)
-
-            client.beta.threads.runs.submit_tool_outputs(
-                thread_id=thread_id,
-                run_id=run.id,
-                tool_outputs=[
-                    {
-                        "tool_call_id": tool.id,
-                        "output": name_info,
-                    },
-                ],
-            )
+            output = get_nickname(arguments["location"])
         else:
             raise Exception(
                 f"Unsupported function call: {tool.function.name} provided."
             )
+
+        tool_outputs.append({"tool_call_id": tool.id, "output": output})
+
+    # The API requires every output for this run to be submitted together.
+    client.beta.threads.runs.submit_tool_outputs(
+        thread_id=thread_id,
+        run_id=run.id,
+        tool_outputs=tool_outputs,
+    )
 
 
 def main():
